@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calculadora Cientifica </title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    
+    .fundo {
+      background-image: url(./zzzzz.jpg); 
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      color: aliceblue;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+    }
+   
+      .calculadora {
+      position: absolute;
+      background-color: rgba(0, 0, 0, 0.8);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 15px;
+      padding: 15px;
+      
+    }
+     .botao { 
+      width: 70px;
+      height: 50px;
+      font-size: 25px;
+      cursor: pointer;
+      margin: 3px;
+      background-color: rgb(31, 31, 31);
+      border: none;
+      color: #fff;
+    }
+     .botao:hover {
+      background-color: black;
+    }
+    
+      #resultado {
+      background-color: white;
+      width: 290px;
+      height: 40px;
+      margin: 5px;
+      font-size: 25px;
+      color: black;
+      text-align: right;
+      padding: 5px;
+      border-radius: 5px;
+    }
+  #dataHora {
+  position: fixed;
+  bottom: 10px;
+  right: 20px;
+  font-size: 16px;
+  color: #ffffff;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 6px 12px;
+  border-radius: 8px;
+  z-index: 1000;
+  font-family:cursive;
+}
+    
+    </style>
+    </head>
+    <body>
+    <div id="dataHora"></div>
+    <div class="fundo">
+        <div class="calculadora">
+        <h1>Calculadora</h1>
+        <h1>Científica </h1>
+        <p id="resultado"></p>
+       
+        <table>
+          <tr>
+          <td><button class="botao" onclick="clean()">C</button></td>
+          <td><button class="botao" onclick="raiz()">√</button></td>
+          <td><button class="botao" onclick="back()">&lt;</button></td>
+          <td><button class="botao" onclick="insert('/')">/</button></td>
+         </tr>
+       
+        <tr>
+          <td><button class="botao" onclick="seno()">sen</button></td>
+          <td><button class="botao" onclick="cosseno()">cos</button></td>
+          <td><button class="botao" onclick="tangente()">tan</button></td>
+          <td><button class="botao" onclick="insert('*')">x</button></td>
+        </tr>
+       
+        <tr>
+          <td><button class="botao" onclick="insert('7')">7</button></td>
+          <td><button class="botao" onclick="insert('8')">8</button></td>
+          <td><button class="botao" onclick="insert('9')">9</button></td>
+          <td><button class="botao" onclick="insert('+')">+</button></td>
+        </tr>
+        
+        <tr>
+          <td><button class="botao" onclick="insert('4')">4</button></td>
+          <td><button class="botao" onclick="insert('5')">5</button></td>
+          <td><button class="botao" onclick="insert('6')">6</button></td>
+          <td><button class="botao" onclick="insert('-')">-</button></td>
+        </tr>
+        
+        <tr>
+           <td><button class="botao" onclick="insert('1')">1</button></td>
+           <td><button class="botao" onclick="insert('2')">2</button></td>
+           <td><button class="botao" onclick="insert('3')">3</button></td>
+           <td><button class="botao" onclick="insert('^')">^</button></td>
+        
+         
+        </tr>
+        
+        <tr>
+          <td><button class="botao" onclick="insert('0')">0</button></td>
+          <td><button class="botao" onclick="insert('.')">.</button></td>
+          <td><button class="botao" onclick="pi()">π</button></td>
+          <td><button class="botao" onclick="calcular()">=</button></td>
+        </tr>
+        
+        <tr>
+          <td><button class="botao" onclick="log()">log</button></td>
+          <td><button class="botao" onclick="exp()">exp</button></td>
+          <td><button class="botao" onclick="insert('(')">(</button></td>
+          <td><button class="botao" onclick="insert(')')">)</button></td>
+        </tr>
+     
+    </table>
+    </div>
+    </div>
+    
+
+     <script>
+     function insert(num) {
+     document.getElementById('resultado').innerHTML += num;
+    }
+
+      function clean() {
+      document.getElementById('resultado').innerHTML = "";
+    }  
+  
+     function back() {
+     let resultado = document.getElementById('resultado').innerHTML;
+     document.getElementById('resultado').innerHTML = resultado.slice(0, -1);
+    }
+
+   
+    function calcular() {
+    let resultado = document.getElementById('resultado').innerHTML;
+    if (resultado) {
+    try {
+      let valor = eval(resultado);
+      document.getElementById('resultado').innerHTML = parseFloat(valor.toFixed(6)); // até 6 casas decimais
+    } catch {
+      document.getElementById('resultado').innerHTML = "Erro";
+    }
+  } else {
+    document.getElementById('resultado').innerHTML = "Nada...";
+  }
+}
+
+     function raiz() {
+     let resultado = document.getElementById('resultado').innerHTML;
+     if (resultado) {
+        try {
+      let valor = eval(resultado);
+      document.getElementById('resultado').innerHTML = Math.sqrt(valor);
+    } catch {
+      document.getElementById('resultado').innerHTML = "Erro";
+    }
+  } else {
+    document.getElementById('resultado').innerHTML = "Nada...";
+  }
+}
+
+    function seno() {
+    let resultado = document.getElementById('resultado').innerHTML;
+          if (resultado) {
+    try {
+      let valor = eval(resultado);
+      let radianos = valor * Math.PI / 180; // converte graus para radianos
+      document.getElementById('resultado').innerHTML = Math.sin(radianos);
+    } catch {
+      document.getElementById('resultado').innerHTML = "Erro";
+    }
+  } else {
+    document.getElementById('resultado').innerHTML = "Nada...";
+  }
+}
+
+  
+   function cosseno() {
+   let resultado = document.getElementById('resultado').innerHTML;
+        if (resultado) {
+    try {
+      let valor = eval(resultado);
+      let radianos = valor * Math.PI / 180; // converte graus para radianos
+      document.getElementById('resultado').innerHTML = Math.cos(radianos);
+    } catch {
+      document.getElementById('resultado').innerHTML = "Erro";
+    }
+  } else {
+    document.getElementById('resultado').innerHTML = "Nada...";
+  }
+}
+
+    
+     function tangente() {
+     let resultado = document.getElementById('resultado').innerHTML;
+          if (resultado) {
+    try {
+      let valor = eval(resultado);
+      let radianos = valor * Math.PI / 180; // converte graus para radianos
+      document.getElementById('resultado').innerHTML = Math.tan(radianos);
+    } catch {
+      document.getElementById('resultado').innerHTML = "Erro";
+    }
+  } else {
+    document.getElementById('resultado').innerHTML = "Nada...";
+  }
+}
+  
+    function log() {
+    let resultado = document.getElementById('resultado').innerHTML;
+      if (resultado) {
+    try {
+      let valor = eval(resultado);
+      let logDecimal = Math.log(valor) / Math.LN10; // log base 10
+      document.getElementById('resultado').innerHTML = logDecimal.toFixed(6); // arredonda para 6 casas
+    } catch {
+      document.getElementById('resultado').innerHTML = "Erro";
+    }
+  } else {
+    document.getElementById('resultado').innerHTML = "Nada...";
+  }
+}
+   
+  function exp() {
+    let resultado = document.getElementById('resultado').innerHTML;
+       if (resultado) {
+    try {
+      let valor = eval(resultado);
+      let exponencial = Math.exp(valor); // calcula e^x
+      document.getElementById('resultado').innerHTML = exponencial.toFixed(6); // arredonda para 6 casas
+    } catch {
+      document.getElementById('resultado').innerHTML = "Erro";
+    }
+  } else {
+    document.getElementById('resultado').innerHTML = "Nada...";
+  }
+
+}
+  
+function pi() {
+  document.getElementById('resultado').innerHTML += Math.PI.toFixed(15);
+}
+
+  function potencia() {
+  // Obtém o conteúdo do elemento HTML com id 'resultado'
+  let resultado = document.getElementById('resultado').innerHTML;
+
+  // Verifica se o conteúdo contém o símbolo de potência "^"
+  if (resultado.includes('^')) {
+    try {
+      // Divide a string em duas partes: base e expoente
+      let partes = resultado.split('^');
+
+      // Avalia cada parte como uma expressão matemática
+      let base = eval(partes[0]);       // Exemplo: "2" vira 2
+      let expoente = eval(partes[1]);   // Exemplo: "3" vira 3
+
+      // Calcula a potência usando Math.pow(base, expoente)
+      let resultadoFinal = Math.pow(base, expoente);
+
+      // Exibe o resultado com 6 casas decimais
+      document.getElementById('resultado').innerHTML = resultadoFinal.toFixed(6);
+    } catch {
+      // Se ocorrer erro, exibe "Erro" no elemento
+      document.getElementById('resultado').innerHTML = "Erro";
+    }
+  } else {
+    // Se não houver "^", não faz nada ou pode tratar outro tipo de operação
+    document.getElementById('resultado').innerHTML = "Expressão inválida";
+  }
+}
+
+function atualizarDataHora() {
+  const agora = new Date();
+  const opcoes = {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit'
+  };
+  const formato = agora.toLocaleString('pt-BR', opcoes);
+  document.getElementById('dataHora').innerHTML = formato;
+}
+
+setInterval(atualizarDataHora, 1000);
+atualizarDataHora();
+
+let tocando = false;
+
+function trocarMusica() {
+  const player = document.getElementById('player');
+  const select = document.getElementById('musica');
+  player.src = select.value;
+  if (tocando) {
+    player.play();
+  }
+}
+
+function tocarOuParar() {
+  const player = document.getElementById('player');
+  if (tocando) {
+    player.pause();
+    tocando = false;
+  } else {
+    player.play();
+    tocando = true;
+  }
+}
+
+</script> 
+</body>
+
+   <div style="position: fixed; bottom: 20px; left: 20px; background-color: rgba(0,0,0,0.6); padding: 20px; border-radius: 20px;">
+  <label for="musica" style="color: white;">Escolha uma música: <span style="color: black;">🎵 🎶</span></label>
+  <select id="musica" onchange="trocarMusica()" style="margin-left: 10px;">
+    <option value="c:\Users\david\OneDrive\Área de Trabalho\calculadora.html\ISAIAS SAAD - BONDADE DE DEUS (AO VIVO).MP3">Bondade de Deus</option>
+    <option value="c:\Users\david\OneDrive\Área de Trabalho\calculadora.html\A ELE A GLÓRIA - Matheus Rizzo & Coral com 1700 vozes Mega Vigília ASP.MP3">A ele a Gloria</option>
+    <option value="c:\Users\david\OneDrive\Área de Trabalho\calculadora.html\'ACALMA O MEU CORAÇÃO'    ANDERSON FREIRE LEGENDADO.MP3">Acalma o meu coração </option>
+    <option value="c:\Users\david\OneDrive\Área de Trabalho\calculadora.html\Em Teus Braços ao vivo na Lagoinha - Laura Souguellis no Sexta Básica.MP3">Em teus braços</option>
+    <option value="c:\Users\david\OneDrive\Área de Trabalho\calculadora.html\Gabriela Rocha - Atos 2.MP3">Atos 2</option>
+    <option value="c:\Users\david\OneDrive\Área de Trabalho\calculadora.html\Maranata  Avivah (Feat. Fernanda Madaloni) [1].MP3">Maranata </option>
+    <option value="c:\Users\david\OneDrive\Área de Trabalho\calculadora.html\Marine Friesen - Alfa e Ômega (AO VIVO).MP3">Alfa Omega</option>
+    <option value="c:\Users\david\OneDrive\Área de Trabalho\calculadora.html\Samuel Messias - Todavia me Alegrarei (Clipe Oficial MK Music).MP3">Todavia me Alegrarei</option>
+
+  </select>
+  <br><br>
+  <button onclick="tocarOuParar()" class="botao">▶️ ⏸️</button>
+  <audio id="player" src="musica1.mp3"></audio>
+  </div>
+
+  </html>
